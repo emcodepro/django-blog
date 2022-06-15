@@ -1,0 +1,132 @@
+{% extends 'news_app/layouts/base.html' %}
+{% load static %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block content %}
+       <!-- Top News Start-->
+        <div class="top-news">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 tn-left">
+                        <div class="row tn-slider">
+                            {% for article in top_five_news %}
+                                <div class="col-md-6">
+                                <div class="tn-img">
+                                    <img  style="height: 400px;" src="{{ article.get_image_url }}" />
+                                    <div class="tn-title">
+                                        <a href="{% url 'view' article_id=article.id %}">
+                                            {{ article.title }}
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="col-md-6 tn-right">
+                        <div class="row">
+                            <div class="col-md-6 pr-3 pb-3">
+                                <div class="tn-img">
+                                    <img style="height: 171px;" src="{{ four_news.first.get_image_url }}"  alt="{{ four_news.first.title }}"/>
+                                    <div class="tn-title">
+                                        <a href="{% url 'view' article_id=four_news.first.id %}">{{ four_news.first.title }}</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 pb-3">
+                                <div class="tn-img">
+                                    <img style="height: 171px;" src="{{ four_news.second.get_image_url }}"  alt="{{ four_news.second.title }}"/>
+                                    <div class="tn-title">
+                                        <a href="{% url 'view' article_id=four_news.second.id %}">{{ four_news.second.title }}</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 pr-3">
+                                <div class="tn-img">
+                                    <img style="height: 171px;" src="{{ four_news.three.get_image_url }}"  alt="{{ four_news.three.title }}"/>
+                                    <div class="tn-title">
+                                        <a href="{% url 'view' article_id=four_news.three.id %}">{{ four_news.three.title }}</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="tn-img">
+                                    <img style="height: 171px;" src="{{ four_news.four.get_image_url }}"  alt="{{ four_news.four.title }}"/>
+                                    <div class="tn-title">
+                                        <a href="{% url 'view' article_id=four_news.four.id %}">{{ four_news.four.title }}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Top News End-->
+
+        <!-- Category News Start-->
+        <div class="cat-news">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h2>Politic</h2>
+                        <div class="row cn-slider">
+                            {% for article in latest_three_politic_news %}
+                            <div class="col-md-6">
+                                <div class="cn-img">
+                                    <img style="height: 171px;" src="{{ article.get_image_url }}"  alt="{{ article.title }}"/>
+                                    <div class="cn-title">
+                                        <a href="{% url 'view' article_id=article.id %}">{{ article.title }}</a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h2>Culture</h2>
+                        <div class="row cn-slider">
+                            {% for article in latest_three_culture_news %}
+                            <div class="col-md-6">
+                                <div class="cn-img">
+                                    <img style="height: 171px;" src="{{ article.get_image_url }}"  alt="{{ article.title }}"/>
+                                    <div class="cn-title">
+                                        <a href="{% url 'view' article_id=article.id %}">{{ article.title }}</a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Category News End-->
+<hr/>
+        <!-- Main News Start-->
+        <div class="main-news">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            {% for article in page_obj %}
+                            <div class="col-md-3 pb-4">
+                                <div class="mn-img">
+                                    <img style="height: 171px;" src="{{ article.get_image_url }}"  alt="{{ article.title }}"/>
+                                    <div class="mn-title">
+                                        <a href="{% url 'view' article_id=article.id %}">{{ article.title }}</a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Main News End-->
+    {% include 'news_app/components/pagination.html' %}
+{% endblock %}

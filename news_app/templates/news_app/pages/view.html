@@ -1,0 +1,62 @@
+{% extends 'news_app/layouts/base.html' %}
+
+{% block title %}
+    {{ article.title }}
+{% endblock %}
+
+{% block content %}
+    <!-- Single News Start-->
+    <div class="single-news">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="sn-container">
+                        <div class="sn-img">
+                            <img src="{{ article.get_image_url }}" alt="{{ article.title }}"/>
+                        </div>
+                        <div class="sn-content">
+                            <h1 class="sn-title">{{ article.title }}</h1>
+                            <p style="white-space: pre-line;">
+                                {{ article.text }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="sidebar">
+                        <div class="sidebar-widget">
+                            <h2 class="sw-title">In This Category</h2>
+                            <div class="news-list">
+                                {% for article in articles_in_this_category %}
+                                    <div class="nl-item">
+                                        <div class="nl-img">
+                                            <img src="{{ article.get_image_url }}" alt="{{ article.title }}"/>
+                                        </div>
+                                        <div class="nl-title">
+                                            <a href="{% url 'view' article_id=article.id %}">{{ article.title }}</a>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <div class="sidebar-widget">
+                            <h2 class="sw-title">News Category</h2>
+                            <div class="category">
+                                <ul>
+                                    {% for category in categories %}
+                                        <li>
+                                            <a href="{% url 'category' category_id=category.id %}">{{ category.name }}</a><span>({{ category.news.all.count }})</span>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Single News End-->
+{% endblock %}
